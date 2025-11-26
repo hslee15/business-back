@@ -1,0 +1,10 @@
+const settlementSchema = new mongoose.Schema({
+  businessUser: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  month: { type: String, required: true }, // 예: "2024-11"
+  totalRevenue: { type: Number, required: true }, // 총 매출
+  platformFee: { type: Number, required: true },  // 수수료
+  tax: { type: Number, required: true },          // 세금
+  finalAmount: { type: Number, required: true },  // 실 지급액
+  status: { type: String, enum: ['pending', 'completed'], default: 'pending' },
+  paymentDate: { type: Date } // 지급 예정일/완료일
+});
