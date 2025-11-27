@@ -3,7 +3,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const businessRoutes = require('./src/routes/businessRoutes');
+// 기능별 라우트 임포트
+const dashboardRoutes = require('./dashboard/dashboardRoutes');
+const hotelRoutes = require('./hotels/hotelRoutes');
+const roomRoutes = require('./rooms/roomRoutes');
+const inventoryRoutes = require('./inventory/inventoryRoutes');
+const bookingRoutes = require('./bookings/bookingRoutes');
+const settlementRoutes = require('./settlements/settlementRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,8 +32,13 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/business-
     process.exit(1);
   });
 
-// 라우트
-app.use('/api/business', businessRoutes);
+// 기능별 라우트 등록
+app.use('/api/business/dashboard', dashboardRoutes);
+app.use('/api/business/hotels', hotelRoutes);
+app.use('/api/business/rooms', roomRoutes);
+app.use('/api/business', inventoryRoutes); // /api/business/rooms/:roomId/inventory, /api/business/rooms/:roomId/pricing
+app.use('/api/business/reservations', bookingRoutes);
+app.use('/api/business/settlements', settlementRoutes);
 
 // 기본 라우트
 app.get('/', (req, res) => {
@@ -62,4 +73,3 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-
