@@ -40,6 +40,9 @@ const hotelSchema = new mongoose.Schema({
   isApproved: {
     type: Boolean,
     default: false
+  },
+  rejectReason: {
+    type: String
   }
 }, {
   timestamps: true

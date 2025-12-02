@@ -41,6 +41,9 @@ const bookingSchema = new mongoose.Schema({
     required: true,
     min: 0
   },
+  cancelReason: {
+    type: String
+  },
   status: {
     type: String,
     enum: ['pending', 'confirmed', 'cancelled', 'completed'],

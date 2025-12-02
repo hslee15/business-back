@@ -6,10 +6,16 @@ require('dotenv').config();
 // 기능별 라우트 임포트
 const dashboardRoutes = require('./dashboard/dashboardRoutes');
 const hotelRoutes = require('./hotels/hotelRoutes');
+const adminHotelRoutes = require('./hotels/adminHotelRoutes');
 const roomRoutes = require('./rooms/roomRoutes');
 const inventoryRoutes = require('./inventory/inventoryRoutes');
 const bookingRoutes = require('./bookings/bookingRoutes');
+const adminBookingRoutes = require('./bookings/adminBookingRoutes');
 const settlementRoutes = require('./settlements/settlementRoutes');
+const adminAuthRoutes = require('./auth/authRoutes');
+const adminReviewRoutes = require('./reviews/reviewRoutes');
+const adminStatsRoutes = require('./adminStats/adminStatsRoutes');
+const adminUserRoutes = require('./users/userAdminRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +39,12 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/business-
   });
 
 // 기능별 라우트 등록
+app.use('/api/admin/auth', adminAuthRoutes);
+app.use('/api/admin/hotels', adminHotelRoutes);
+app.use('/api/admin/bookings', adminBookingRoutes);
+app.use('/api/admin/reviews', adminReviewRoutes);
+app.use('/api/admin/stats', adminStatsRoutes);
+app.use('/api/admin/users', adminUserRoutes);
 app.use('/api/business/dashboard', dashboardRoutes);
 app.use('/api/business/hotels', hotelRoutes);
 app.use('/api/business/rooms', roomRoutes);
